@@ -1,0 +1,74 @@
+.tabs
+	border-bottom: 1px solid $border-component-color
+	position: relative
+
+	a
+		@extend .links-component
+		box-sizing: border-box
+		display: inline-block
+		padding: 0 $padding-component-vertical
+		border: 1px solid transparent
+		height: $height-component-default
+		line-height: $height-component-default
+		position: relative
+		z-index: 2
+
+	&.fat
+		a
+			height: $height-component-fat
+			line-height: $height-component-fat
+
+	&.slim
+		a
+			height: $height-component-slim
+			line-height: $height-component-slim
+
+	.marker
+		display: block
+		height: 100%
+		width: 0
+		position: absolute
+		top: 0
+		left: 0
+		z-index: 1
+		background-color: $border-component-color
+		border-radius: $border-radius $border-radius 0 0
+
+	&.sliding
+		.marker
+			transition: $animation-component-duration*3
+
+.tabs-content
+	overflow: hidden
+	width: 100%
+	position: relative
+	+pie-clearfix
+
+	.pages
+		position: relative
+
+	.page
+		display: none
+		float: left
+		padding: $padding-component-vertical 0
+		+pie-clearfix
+
+		p:last-child
+			margin-bottom: 0
+
+		&.active
+			display: block
+
+	&.sliding
+		transition: height $animation-component-duration*3
+
+		.pages
+			transition: left $animation-component-duration*3
+
+
+	&.bordered
+		box-sizing: border-box
+		border: 1px solid $border-component-color
+		border-top: none
+		border-radius: 0 0 $border-radius $border-radius
+		padding: $padding-component-vertical $padding-component-vertical

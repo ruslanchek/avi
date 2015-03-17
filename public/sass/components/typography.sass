@@ -1,0 +1,138 @@
+h1
+	margin-top: 1.1905em
+	font-size: 2.5em
+	margin-bottom: .5em
+	line-height: 1.1em
+	font-weight: bold
+
+h2
+	font-size: 1.6em
+	margin-bottom: .4em
+	margin-top: 1.28905em
+	line-height: 1.175em
+	font-weight: bold
+
+h3
+	font-size: 1.375em
+	margin-bottom: .4em
+	margin-top: 1.5em
+	line-height: 1.25em
+	font-weight: bold
+
+h4
+	font-size: 1.2em
+	margin-bottom: .4em
+	margin-top: 1.71875em
+	line-height: 1.35em
+	font-weight: bold
+
+h5
+	font-size: 1em
+	margin-bottom: .5em
+	margin-top: 2.0625em
+	line-height: 1.4em
+	font-weight: bold
+
+h1,
+h2,
+h3,
+h4,
+h5
+	&:first-child
+		margin-top: 0
+
+p,
+address,
+ul,
+ol
+	margin-bottom: 1.5em
+
+em
+	font-style: italic
+
+.text-center
+	text-align: center
+
+.text-right
+	text-align: right
+
+.text-fade
+	opacity: .5
+
+.text-slim
+	font-weight: normal
+
+.text-fat
+	font-weight: bold
+
+strong 
+	font-weight: bold
+
+p.lead
+	font-size: 1.2em
+	line-height: 1.5em
+
+hr
+	height: 1px
+	background: $border-component-color
+	margin: 1em 0
+	border: none
+
+pre 
+	tab-size: 4
+
+code
+	font-family: monospace
+	color: $color-faded-text
+	
+.code-multiline
+	display: block
+	background: rgba(0, 0, 0, 0.035)
+	padding: $padding-component-vertical/1.5 $padding-component-side
+	border-radius: $border-radius
+	overflow-x: scroll
+	box-sizing: border-box
+	width: 100%
+
+mark 
+	background-color: $fill-component-mark
+	color: #fff
+	border-radius: $border-radius
+
+.bullet
+	padding-left: 2ex
+	display: block
+	position: relative
+
+	&:before 
+		content: ''
+		background-color: $fill-component-mark
+		width: .5em
+		height: .5em
+		left: 0
+		top: .575em
+		display: block
+		position: absolute
+		border-radius: .25em
+
+ol
+	list-style-position: inside
+	
+	li
+		list-style-type: decimal
+
+ul
+	&.bullets
+		li 
+			@extend .bullet
+
+	&.dashes
+		li
+			position: relative
+			padding-left: 2.75ex
+
+			&:before
+				position: absolute
+				left: 0
+				top: 0
+				content: '\2014'

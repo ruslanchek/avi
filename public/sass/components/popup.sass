@@ -1,0 +1,123 @@
+.popup
+	position: fixed
+	height: 100vh
+	width: 100vw
+	top: 0
+	left: 0
+	z-index: 99
+
+	.overlay
+		position: absolute
+		top: 0
+		left: 0
+		height: 100%
+		width: 100%
+		background: rgba(0, 0, 0, .4)
+		z-index: 100
+
+		+breakpoint($bp-iphone)
+			background: rgba(0, 0, 0, .8)
+
+	.window
+		position: absolute
+		width: 400px
+		background: #fff
+		border-radius: $border-radius
+		top: 50%
+		left: 50%
+		box-sizing: border-box
+		margin: -150px 0 0 -200px
+		box-shadow: 0 20px 80px rgba(0, 0, 0, .5)
+		z-index: 101
+
+		+breakpoint($bp-iphone)
+			width: 95vw !important
+			height: 96vh !important
+			margin: -48vh 0 0 -47.5vw !important
+			box-shadow: none
+
+		.title
+			font-size: 1.375em
+			border-radius: $border-radius $border-radius 0 0
+			background-color: $color-light-gray-light
+			padding: $padding-component-vertical $padding-component-side
+			position: relative
+
+			.wait-indicator
+				z-index: 1
+				position: absolute
+				top: 0
+				left: 0
+				width: 100%
+				height: 100%
+				opacity: 0
+				border-radius: $border-radius $border-radius 0 0
+				transition: opacity .4s
+				@extend .wait-bg-dark
+
+			.text
+				position: relative
+				z-index: 2
+
+		.messages
+			overflow: hidden
+			height: 0
+
+			.message
+				color: #fff
+				padding: .5em $padding-component-side
+				background-color: $color-medium-gray-light
+
+				&.error
+					background-color: $color-error
+
+				&.success
+					background-color: $color-success
+
+		.content
+			padding: $padding-component-vertical $padding-component-side
+
+			+breakpoint($bp-iphone)
+				overflow: auto
+
+			*:last-child
+				margin-bottom: 0
+
+			.tabs
+				margin-left: -20px
+				padding-left: 20px
+				padding-right: 20px
+				width: 100%
+
+			.tabs-content
+				.page
+					padding-bottom: 0
+
+		.bottom
+			padding: $padding-component-vertical $padding-component-side
+
+		.close
+			position: absolute
+			z-index: 3
+			top: 12px
+			right: 10px
+			height: 40px
+			width: 40px
+			font-size: 20px
+			line-height: 40px
+			text-align: center
+			@extend .links-component
+
+		&.wait
+			.title
+				.wait-indicator
+					opacity: 1
+
+	&.no-overlay
+		+breakpoint($bp-gt-iphone)
+			position: static
+			width: 0
+			height: 0
+
+			.overlay
+				display: none

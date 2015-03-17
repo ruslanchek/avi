@@ -1,0 +1,263 @@
+.nav
+	box-sizing: border-box
+
+	&[data-collapse="true"]
+		height: $height-component-default
+		overflow: hidden
+		position: relative
+		cursor: pointer
+
+		&:before 
+			content: attr(data-collapsed-text)
+			display: block
+			height: $height-component-default
+			line-height: $height-component-default
+			box-sizing: border-box
+			@extend .links-component
+
+		&:after
+			font: normal normal normal 14px/1 FontAwesome
+			content: $fa-var-bars
+			display: inline-block
+			position: absolute
+			width: 20px
+			height: 20px
+			top: 50%
+			right: 10px
+			font-size: 18px
+			margin-top: -8px
+
+		&.bordered,
+		&.filled 
+			&:before
+				padding: 0 $padding-component-side
+
+	a
+		height: $height-component-default
+		line-height: $height-component-default
+		box-sizing: border-box
+		display: block
+		transition: $animation-component-duration
+		@extend .links-component
+
+		&:hover
+			opacity: .8
+
+		&.active,
+		&:active
+			opacity: .7
+
+	&.bordered,
+	&.filled
+		a.active
+			opacity: 1
+
+	&:not(.horizontal)
+		white-space: nowrap
+		overflow: hidden
+		text-overflow: clip
+
+	+breakpoint($bp-iphone)
+		white-space: nowrap
+		overflow: hidden
+		text-overflow: clip
+
+	&.white
+		a
+			color: #fff
+
+	&.filled
+		background-color: $fill-component-color
+		border-radius: $border-radius
+
+		a
+			color: #fff
+			padding: 0 $padding-component-side
+			opacity: 1
+
+			&:hover
+				background-color: $fill-component-hover
+
+			&:active,
+			&.active
+				background-color: $fill-component-active
+
+			&:first-child
+				border-radius: $border-radius - 1 $border-radius - 1 0 0
+
+			&:last-child
+				border-radius: 0 0 $border-radius - 1 $border-radius - 1
+
+	&.bordered
+		background-color: transparent
+		border: 1px solid $border-component-color
+		border-radius: $border-radius
+
+		a
+			padding: 0 $padding-component-side
+			border-bottom: 1px solid $border-component-color
+			color: $color-links-component
+			opacity: 1
+
+			&:hover
+				background-color: $fill-component-bordered-hover
+
+			&:active
+				background-color: $fill-component-bordered-active
+
+			&.active
+				background-color: $fill-component-bordered-selected
+
+			&:first-child
+				border-radius: $border-radius - 1 $border-radius - 1 0 0
+
+			&:last-of-type
+				border-radius: 0 0 $border-radius - 1 $border-radius - 1
+				border-bottom: none
+
+	+breakpoint($bp-gt-iphone)
+		&.horizontal
+			a
+				padding: 0 $padding-component-side*2 0 0
+				display: inline-block
+
+				&:first-child
+					border-radius: $border-radius - 1 0 0 $border-radius - 1
+
+				&:last-child
+					border-radius: 0 $border-radius - 1 $border-radius - 1 0
+
+			&.bordered,
+			&.filled
+				text-align: center
+				display: table
+				table-layout: fixed
+				width: 100%
+
+				a
+					padding: 0
+					display: table-cell
+					width: 2%
+
+			&.bordered
+				a
+					border-bottom: none
+					border-right: 1px solid $border-component-color
+
+					&:last-of-type
+						border-right: none
+
+	&.fat a
+		height: $height-component-fat
+		line-height: $height-component-fat
+
+
+	&.slim a
+		height: $height-component-slim
+		line-height: $height-component-fat
+
+
+.nav-bricks
+	.item
+		text-align: center
+		display: block
+		margin-bottom: $margin-vertical-space
+		@extend .links-component
+
+		.icon
+			font-size: 3.8em
+			padding: .55em 0
+			border-radius: $border-radius $border-radius 0 0
+			color: #fff
+			display: block
+			position: relative
+			border: 1px solid $border-component-color
+			box-sizing: border-box
+
+			&[class^="bg-"],
+			&[class*=" bg-"]
+				border: none
+
+			img
+				display: block
+				margin: 0 auto
+
+			&:after
+				content: ''
+				display: block
+				width: 100%
+				height: 100%
+				position: absolute
+				border-radius: $border-radius $border-radius 0 0
+				top: 0
+				left: 0
+				background: #fff
+				opacity: 0
+				transition: opacity $animation-component-duration
+
+		&:hover
+			.icon
+				&:after
+					opacity: .3
+
+		.text
+			box-sizing: border-box
+			display: block
+			margin: 0 auto
+			text-align: center
+			border: 1px solid $border-component-color
+			border-top: none
+			border-radius: 0 0 $border-radius $border-radius
+			padding: 10px 0
+
+.nav-glossary
+	.item
+		display: block
+		@extend .links-component
+		+clearfix
+
+		.icon
+			width: 1.7em
+			height: 1.7em
+			font-size: 1.8em
+			line-height: 1.72em
+			margin-right: $padding-component-side / 2
+			border-radius: $border-radius
+			color: #fff
+			display: inline-block
+			position: relative
+			box-sizing: border-box
+			text-align: center
+			float: left
+
+			&[class^="bg-"],
+			&[class*=" bg-"]
+				margin-right: $padding-component-side
+
+			img
+				display: block
+				margin: 0 auto
+
+			&:after
+				content: ''
+				display: block
+				width: 100%
+				height: 100%
+				position: absolute
+				border-radius: $border-radius $border-radius 0 0
+				top: 0
+				left: 0
+				background: #fff
+				opacity: 0
+				transition: opacity $animation-component-duration			
+
+		&:hover
+			.icon
+				&:after
+					opacity: .3
+
+		.text
+			margin-top: .78em
+			overflow: hidden
+			display: block
+			zoom: 1

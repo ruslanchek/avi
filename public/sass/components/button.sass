@@ -1,0 +1,272 @@
+.button
+	background-color: $fill-button-color
+	border: none
+	display: inline-block
+	padding: 0 $padding-component-side
+	height: $height-component-default
+	line-height: $height-component-default
+	position: relative
+	outline: none
+	margin: 0
+	border-radius: $border-radius
+	transition: opacity .2s
+	box-sizing: border-box
+	color: $color-links-component
+	text-align: center
+	font-size: $font-base-font-size
+	cursor: pointer
+	white-space: nowrap
+	overflow: hidden
+	text-overflow: ellipsis
+	min-width: 100px
+
+	&:visited,
+	&:active,
+	&:focus
+		color: $color-links-component
+
+	&:before
+		content: ''
+		position: absolute
+		display: block
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		border-radius: $border-radius - 2
+		transition: $animation-component-duration
+
+	&:hover
+		color: $color-links-component
+
+		&:before
+			background-color: $fill-component-hover
+
+	&:active
+		transform: translateY(1px)
+
+		&:before
+			background-color: $fill-component-hover
+
+	&.active
+		&:before
+			background-color: rgba(0, 0, 0, .05) !important
+
+	&[class^="bg-"], 
+	&[class*=" bg-"]
+		&:not(.wireframe)
+			color: #fff
+
+			&:hover,
+			&:active
+				color: #fff
+
+	&.wait
+		@extend .wait-bg
+
+		&:active,
+		&.active
+			transform: none
+
+		&.volume
+			@extend .emboss
+
+			&:active,
+			&.active
+				@extend .emboss
+
+		&:before
+			display: none
+
+	&.volume
+		@extend .bevel
+
+		&:active
+			@extend .bevel-active
+
+			&:before
+				background-color: $fill-component-hover
+
+			&:disabled,
+			.wait
+				@extend .bevel
+
+		&.active
+			@extend .bevel-active
+
+	// @TODO: Improve that shit, needs to be merged
+	&.next
+		padding-right: 40px
+		padding-left: 40px
+
+		&:after
+			font: normal normal normal 14px/1 FontAwesome
+			content: $fa-var-chevron-right
+			display: inline-block
+			position: absolute
+			width: 20px
+			height: 20px
+			top: 50%
+			right: 10px
+			font-size: 18px
+			margin-top: -8px
+			transition: right $animation-component-duration
+
+		&:hover
+			&:after
+				right: 5px
+
+	&.prev
+		padding-left: 40px
+		padding-right: 40px
+
+		&:after
+			font: normal normal normal 14px/1 FontAwesome
+			content: $fa-var-chevron-left
+			display: inline-block
+			position: absolute
+			width: 20px
+			height: 20px
+			top: 50%
+			left: 10px
+			font-size: 18px
+			margin-top: -8px
+			transition: left $animation-component-duration
+
+		&:hover
+			&:after
+				left: 5px
+
+	&.wireframe
+		background-color: transparent
+		border: 1px solid $color-links-component + 50
+		box-shadow: none !important
+		line-height: $height-component-default - 1
+
+		&:before
+			background-color: $color-links-component + 50
+			opacity: 0
+
+		&:hover
+			&:before
+				opacity: .075
+
+		&:active
+			&:before
+				opacity: .125
+
+		&.wait
+			&:before
+				display: block
+				opacity: .125
+				
+			border-color: $fill-button-color - 20
+			@extend .wait-bg-dark
+
+	&:disabled,
+	&.disabled
+		cursor: default
+		opacity: .5
+
+		&:before
+			display: none
+
+		&:active,
+		&.active
+			transform: none
+
+	&.fat
+		height: $height-component-fat
+		line-height: $height-component-fat
+
+		&.wireframe
+			line-height: $height-component-fat - 1
+
+	&.slim
+		height: $height-component-slim
+		line-height: $height-component-slim
+
+		&.wireframe
+			line-height: $height-component-slim - 1
+
+
+.button-group
+	+breakpoint($bp-gt-iphone)
+		font-size: 0 // Trick to kill parasite space between inline-blocks
+		white-space: nowrap
+		+clearfix()
+
+		.button
+			border-radius: 0
+
+			&:before
+				border-radius: 0
+
+			&:first-child
+				border-top-left-radius: $border-radius
+				border-bottom-left-radius: $border-radius
+				margin-left: 0
+
+				&:before
+					border-top-left-radius: $border-radius
+					border-bottom-left-radius: $border-radius
+
+				&.wireframe
+					border-right: none
+
+			&:last-child
+				border-top-right-radius: $border-radius
+				border-bottom-right-radius: $border-radius
+
+				&:before
+					border-top-right-radius: $border-radius
+					border-bottom-right-radius: $border-radius
+
+		&.separators
+			.button
+				border-left: 1px solid rgba(0, 0, 0, .05)
+
+				&:first-child
+					border-left: none
+
+	+breakpoint($bp-iphone)
+		.button
+			width: 100%
+			border-radius: 0
+			display: block
+			
+			&:before
+				border-radius: 0
+
+			&:first-child
+				border-top-left-radius: $border-radius
+				border-top-right-radius: $border-radius
+				margin-left: 0
+
+				&:before
+					border-top-left-radius: $border-radius
+					border-top-right-radius: $border-radius
+
+				&.wireframe
+					border-bottom: none !important
+
+			&:last-child
+				border-bottom-left-radius: $border-radius
+				border-bottom-right-radius: $border-radius
+
+				&:before
+					border-bottom-left-radius: $border-radius
+					border-bottom-right-radius: $border-radius
+
+			&.bevel:not(:last-child)
+				box-shadow: none
+
+		&.separators
+			.button
+				border-top: 1px solid rgba(0, 0, 0, .05)
+
+				&:first-child
+					border-top: none !important
+
+
+// @TODO: Add white and bordered styles to the button 

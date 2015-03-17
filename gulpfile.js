@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
 	jshint = require('gulp-jshint'),
 	jshintReporter = require('jshint-stylish'),
+	sass = require('gulp-sass'),
 	watch = require('gulp-watch');
 
 /*
