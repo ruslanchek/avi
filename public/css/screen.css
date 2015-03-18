@@ -1857,7 +1857,7 @@ body {
   color: #434a53;
   line-height: 1.5em;
   font-size: 16px;
-  min-width: 1000px; }
+  min-width: 940px; }
   @media (min-width: 0) and (max-width: 569px) {
     body {
       width: 100%;
@@ -1867,10 +1867,10 @@ body {
 .limiter {
   width: 100%;
   margin: 0 auto;
-  padding: 0 5%;
+  padding: 0 0;
   box-sizing: border-box;
-  max-width: 1200px;
-  min-width: 1000px; }
+  max-width: 940px;
+  min-width: 940px; }
   @media (min-width: 0) and (max-width: 569px) {
     .limiter {
       width: 100%;
@@ -5105,7 +5105,7 @@ header {
   header .top {
     padding: 20px 0; }
   header .logo {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: bold;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);

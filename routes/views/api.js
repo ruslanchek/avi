@@ -20,6 +20,7 @@ var API = function(options){
         	if(_.isArray(val)){
         		_.each(val, function(item){
 					objectSorted.push({
+						needSort: true,
 						key: key,
 						val: item
 					});
@@ -39,11 +40,26 @@ var API = function(options){
 
 		_.each(objectSorted, function(item){
 			if(_.isObject(item.val) && !_.isArray(item.val)){
-				_.each(item.val, function(item){
-					// TODO: SORTING of params!!!!!!!!!
+				if(item.needSort === true){
+					var items = [];
 
-					str += item + ':';
-				});
+					_.each(item.val, function(val, key){
+						items.push({
+							val: val,
+							key: key
+						});
+					});
+
+					items = _.sortBy(items, 'key');
+
+					_.each(items, function(item){
+						str += item.val + ':';
+					});
+				}else{
+					_.each(item.val, function(item){
+						str += item + ':';
+					});
+				}
 			}else{
 				str += item.val + ':';
 			}	
@@ -61,10 +77,9 @@ var API = function(options){
 		dataPre.signature = signature;
 
 		var data = JSON.stringify(dataPre);
-
 		var result = '';
 
-		var request = http.request({
+		var req = http.request({
 			host: 'api.travelpayouts.com',
 			port: 80,
 			path: '/v1/flight_search',
@@ -73,26 +88,35 @@ var API = function(options){
 				'Content-Type': 'application/json',
 	        	'Content-Length': Buffer.byteLength(data)
 			}
-		}, function(response) {
-			response.setEncoding('utf8');
-
-			response.on('data', function (chunk){
-				result += chunk;
-
-				request.emit('end');
-			});
+		}, function(res) {
+			res.setEncoding('utf8');
 		});
 
-		request.on('error', function(e) {
+		req.on('response', function (res) {
+		    var data = "";
+
+		    res.on('data', function (chunk) {
+		        data += chunk;
+		    });
+
+		    res.on('end', function(){
+		    	try{
+		    		var out = JSON.parse(data);
+		    		done(true, out);
+
+		    	}catch(e){
+		    		console.error(data);
+					done(false, null);
+		    	}
+		    });
+		});
+
+		req.on('error', function(e) {
 			return done(false, null);
 		});
 
-		request.on('end', function(){
-			return done(true, result);
-		});
-
-		request.write(data);
-		request.end();
+		req.write(data);
+		req.end();
 	};
 
 	this.search = function(data, done){
@@ -100,8 +124,8 @@ var API = function(options){
 			trip_class: 'Y',
 			passengers: {
 				adults: 1,
-				children: 0,
-				infants: 0
+				infants: 0,
+				children: 0
 			},
 			segments: [
 				{date: '2015-05-25', destination: 'LED', origin: 'MOW'},
